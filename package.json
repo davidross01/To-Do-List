@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,8 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }

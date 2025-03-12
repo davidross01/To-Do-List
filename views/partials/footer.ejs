@@ -1,3 +1,60 @@
+<script>
+    function changeBackground(color) {
+        document.documentElement.style.backgroundImage = `-webkit-linear-gradient(65deg, ${color} 50%, #e4e9fd 50%)`;
+        document.getElementById("heading").style.backgroundColor = color;
+
+        const addButtons = document.querySelectorAll("button.add");
+        addButtons.forEach(button => {
+            button.style.backgroundColor = color;
+        });
+
+        // Save color to localStorage
+        localStorage.setItem("backgroundColor", color);
+    }
+
+    // Apply stored color on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedColor = localStorage.getItem("backgroundColor");
+        if (savedColor) {
+            changeBackground(savedColor);
+        }
+    });
+
+    function changeBackground(color) {
+    // Change background gradient
+    document.documentElement.style.backgroundImage = `-webkit-linear-gradient(65deg, ${color} 50%, #e4e9fd 50%)`;
+    
+    // Change heading background color
+    document.getElementById("heading").style.backgroundColor = color;
+
+    // Change add button background colors
+    document.querySelectorAll("button.add").forEach(button => {
+        button.style.backgroundColor = color;
+    });
+
+    // Change focus box-shadow for text inputs
+    const style = document.createElement("style");
+    style.innerHTML = `
+        input[type="text"]:focus {
+            box-shadow: inset 0 -3px 0 0 ${color} !important;
+            outline: none;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Save color to localStorage
+    localStorage.setItem("backgroundColor", color);
+}
+    
+
+    // Apply stored color on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedColor = localStorage.getItem("backgroundColor");
+        if (savedColor) {
+            changeBackground(savedColor);
+        }
+    });
+</script>
 </main>
 <footer>Copyright © <%= new Date().getFullYear() %>
 </footer>

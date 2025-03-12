@@ -1,30 +1,40 @@
 <%- include('partials/header.ejs'); -%>
-
+  <!-- Title -->
   <div class="box" id="heading">
     <h1>
-      <%= listTitle %>
+      <%= listTitle %>'s List
     </h1>
   </div>
+
   <div class="box">
     <% for(let item of listItems){%>
+
       <div class="item">
         <form action="/delete" method="post">
-          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
+          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.item_id %>">
         </form>
-        
-        <p id="title<%=item.id%>">
+
+        <p id="title<%=item.item_id%>">
           <%= item.title %>
         </p>
 
         <form class="edit" action="/edit" method="post">
-          <input type="hidden" name="updatedItemId" value="<%= item.id %>">
-          <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.title %>" autocomplete="off"
-            autofocus="true" hidden="true" />
-          <button id="done<%=item.id%>" class="edit" type="submit" hidden><img class="icon"
-              src="/assets/icons/check-solid.svg" alt="tick image"></button>
+          <input type="hidden" name="updatedItemId" value="<%= item.item_id %>">
+          <input id="input<%=item.item_id%>" type="text" name="updatedItemTitle" value="<%= item.title %> "
+            autocomplete="off" autofocus="true" hidden="true" />
+
+          <button id="done<%=item.item_id%>" class="edit" type="submit" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="<%=item.color%>" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M13.485 1.929a.75.75 0 0 1 1.06 1.06l-8 8a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 0 1 1.06-1.06L6 9.439l7.485-7.51z"/>
+            </svg>
+            </button>
         </form>
-        <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')"><img class="icon"
-            src="/assets/icons/pencil-solid.svg" alt="pencil image"></button>
+        <!-- Edit button -->
+        <button id="edit<%=item.item_id%>" class="edit" onclick="handler('<%=item.item_id%>')">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="<%=item.color%>" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+              <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+            </svg>
+        </button>
       </div>
       <% } %>
 
@@ -34,7 +44,7 @@
         </form>
   </div>
 
-  <script>
+    <script>
     function handler(id) {
       document.getElementById("title" + id).setAttribute("hidden", true);
       document.getElementById("edit" + id).setAttribute("hidden", true);
