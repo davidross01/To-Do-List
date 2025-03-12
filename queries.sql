@@ -1,6 +1,15 @@
-CREATE TABLE items (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(100) NOT NULL
+-- Create the users table (assuming user_id is from this table)
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(45),
+    color VARCHAR(15)
 );
 
-INSERT INTO items (title) VALUES ('Buy milk'), ('Finish homework');
+
+-- Create the items table with a foreign key to users
+CREATE TABLE items (
+    item_id INTEGER PRIMARY KEY,
+    title VARCHAR(100),
+    user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
